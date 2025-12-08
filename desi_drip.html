@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Desi Drip — Where Tradition Meets Trend</title>
+  <meta name="description" content="Desi Drip: fusion of Indian tradition & Gen Z streetwear. Ready-to-wear & custom pieces." />
+  <style>
+    /* Desi Drip — single-file styles
+       Warm tones + minimal Gen-Z layout
+    */
+    :root{
+      --bg:#f7efe6;
+      --maroon:#7a1226;
+      --mustard:#d4a017;
+      --beige:#f4e9d8;
+      --deep:#111;
+      --muted:#6b6b6b;
+      --accent: linear-gradient(135deg,#7a1226,#c43f2b,var(--mustard));
+      --card-shadow: 0 10px 30px rgba(16,16,16,0.08);
+      --radius:14px;
+      --container:1100px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#fff 0%,var(--bg) 100%);
+      color:var(--deep);
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+    }
+
+    .container{max-width:var(--container); margin:0 auto; padding:1.25rem;}
+
+    header{
+      position:sticky; top:0; z-index:50;
+      background:rgba(255,255,255,0.7); backdrop-filter:blur(6px);
+      border-bottom:1px solid rgba(0,0,0,0.04);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:1rem;}
+    .logo{display:flex; align-items:center; gap:0.9rem; text-decoration:none; color:var(--maroon); font-weight:700}
+    .logo .mark{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:900;background:linear-gradient(135deg,#7a1226,#c43f2b)}
+    .logo .brand{font-family:"Lucida Handwriting",cursive; font-size:1.1rem; letter-spacing:0.6px}
+    nav ul{display:flex; gap:12px; list-style:none; margin:0; padding:0; align-items:center}
+    nav a{color:var(--deep); text-decoration:none; padding:0.45rem 0.6rem; border-radius:10px; font-weight:600; transition:all .18s}
+    nav a:hover{transform:translateY(-3px); background:rgba(122,18,38,0.05)}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns:1fr; gap:1.5rem; padding:2.6rem 0}
+    .hero-inner{display:flex; gap:2rem; align-items:center; justify-content:space-between; flex-wrap:wrap}
+    .hero-card{flex:1 1 480px; background:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.5)); border-radius:var(--radius); padding:2rem; box-shadow:var(--card-shadow)}
+    .eyebrow{display:inline-block;background:linear-gradient(90deg, rgba(212,160,23,0.09), transparent); color:var(--mustard); padding:0.25rem 0.6rem; border-radius:999px; font-weight:700; font-size:0.82rem}
+    h1{margin:0 0 0.5rem 0; color:var(--maroon); font-size:2rem}
+    .tagline{font-family:"Lucida Handwriting",cursive; color:#5b121f; margin-bottom:0.8rem}
+    p.lead{color:var(--muted); margin:0 0 1rem 0}
+
+    .ctas{display:flex; gap:0.6rem; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:0.6rem; padding:0.7rem 1rem; border-radius:12px; cursor:pointer; font-weight:800; border:0}
+    .btn.primary{background:linear-gradient(90deg,#7a1226,#c43f2b,#d4a017); color:#fff}
+    .btn.ghost{background:transparent; border:1px solid rgba(122,18,38,0.08); color:var(--maroon)}
+    .btn.primary:hover{transform:translateY(-6px); box-shadow:0 18px 40px rgba(124,18,38,0.16)}
+    .btn.ghost:hover{transform:translateY(-3px)}
+
+    .hero-visual{flex:1 1 380px; min-width:260px; border-radius:12px; overflow:hidden; box-shadow:var(--card-shadow); display:grid; grid-template-rows:1fr auto}
+    .hero-visual img{width:100%; height:100%; object-fit:cover; transition:transform .6s}
+    .hero-visual:hover img{transform:scale(1.04) rotate(-1deg)}
+    .small-caption{padding:0.75rem 1rem; display:flex; justify-content:space-between; align-items:center; font-size:0.9rem; color:var(--muted)}
+
+    /* Gallery */
+    .gallery-wrap{margin-top:2rem}
+    .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .card{border-radius:12px; overflow:hidden; background:var(--beige); position:relative; box-shadow:0 8px 30px rgba(16,16,16,0.06)}
+    .card img{width:100%; height:220px; object-fit:cover; display:block; transition:transform .45s ease, filter .45s ease}
+    .card:hover img{transform:scale(1.06)}
+    .overlay{position:absolute; left:0; right:0; bottom:0; padding:0.8rem 1rem; background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.45)); color:#fff; display:flex; justify-content:space-between; align-items:center}
+    .overlay .title{font-weight:700}
+    .overlay .tag{opacity:0.9; font-size:0.84rem}
+
+    /* Form/Modal */
+    .modal-backdrop{position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(6,6,6,0.45); z-index:80; padding:1.2rem}
+    .modal{width:100%; max-width:720px; background:#fff; border-radius:14px; box-shadow:0 30px 80px rgba(6,6,6,0.36); overflow:hidden; transform:translateY(20px) scale(.98); transition:all .28s}
+    .modal.open{transform:translateY(0) scale(1)}
+    .form{display:grid; gap:0.85rem; padding:1.1rem}
+    label{font-weight:700; font-size:0.92rem}
+    input[type="text"], input[type="email"], textarea, input[type="file"]{width:100%; padding:0.7rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); font-size:0.95rem}
+    textarea{min-height:110px; resize:vertical}
+    .file-preview{font-size:0.9rem; color:var(--muted); margin-top:0.3rem}
+
+    .form-footer{display:flex; gap:0.6rem; justify-content:flex-end; padding:0.9rem 1.1rem; border-top:1px solid rgba(0,0,0,0.04); background:linear-gradient(180deg, rgba(250,250,250,0.7), transparent)}
+
+    footer{margin-top:2.6rem; padding:1.6rem 0; background:linear-gradient(180deg, rgba(122,18,38,0.03), rgba(212,160,23,0.02)); border-top:1px solid rgba(0,0,0,0.04)}
+    .footer-grid{display:flex; gap:1.2rem; justify-content:space-between; align-items:flex-start; flex-wrap:wrap}
+
+    .muted{color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:900px){ .gallery{grid-template-columns:repeat(2,1fr)} .hero-inner{flex-direction:column-reverse} }
+    @media (max-width:560px){ .gallery{grid-template-columns:1fr} h1{font-size:1.6rem} .logo .brand{font-size:1rem} .hero{padding:1.6rem 0} .card img{height:180px} }
+
+    /* small reveal animation (reduced motion respected) */
+    .reveal{transform:translateY(12px); opacity:0; transition:all .6s ease}
+    .reveal.in{transform:translateY(0); opacity:1}
+    @media (prefers-reduced-motion: reduce){ *{transition:none!important} .hero-visual img{transform:none!important} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav" role="banner">
+      <a class="logo" href="#top" aria-label="Desi Drip">
+        <div class="mark">DD</div>
+        <div>
+          <div class="brand">Desi Drip</div>
+          <div style="font-size:0.82rem; color:var(--muted); font-weight:600">Fusion • Ready-to-wear • Custom</div>
+        </div>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#collection">Collection</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#order" id="order-link">Order</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container" role="main">
+    <section class="hero">
+      <div class="hero-inner">
+        <article class="hero-card reveal" aria-labelledby="hero-heading">
+          <div class="eyebrow">NEW DROP • Fusion Edit</div>
+          <h1 id="hero-heading">Where Tradition Meets Trend</h1>
+          <div class="tagline">A slow stitch of heritage, a quick beat of the street.</div>
+          <p class="lead">Desi Drip crafts Indo-western looks for the generation that honors roots and races forward. Ready-to-wear or made-to-order — bold silhouettes, hand-inspired motifs, and youthful minimalism.</p>
+          <div class="ctas">
+            <button class="btn primary" id="open-order">Customize Your Fit</button>
+            <a class="btn ghost" href="#gallery">Shop Gallery</a>
+          </div>
+          <p style="margin-top:1rem; color:var(--muted)">Tip: hover any image to see the magic — gentle motion, like a sari in the evening breeze.</p>
+        </article>
+
+        <aside class="hero-visual reveal" aria-hidden="true">
+          <img src="https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/597c5a93-64a4-530d-84b4-e687246e3e1e/dbc7067e-b150-5d69-b7cb-000f8e448c3e.jpg" alt="Fusion outfit hero" loading="lazy">
+          <div class="small-caption"><strong>Fusion Capsule</strong><span class="muted">Maroon • Mustard • Earth</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="collection" style="margin-top:1rem;">
+      <h2 style="color:var(--maroon); margin-bottom:0.4rem">Our Collection</h2>
+      <p class="muted">Handpicked silhouettes: kurtas with street cuts, draped jackets, dhoti-pants reimagined, cropped bandhgalas — wearable tradition with a Gen Z pulse.</p>
+
+      <div style="display:flex; gap:12px; margin-top:0.8rem; flex-wrap:wrap;">
+        <div style="flex:1 1 220px; background:linear-gradient(180deg,var(--beige),#fff); padding:1rem; border-radius:12px; box-shadow:var(--card-shadow)">
+          <strong>Ready-to-Wear</strong>
+          <div class="muted" style="margin-top:0.6rem">Curated fits for festivals, campus, and street-ready moments.</div>
+        </div>
+
+        <div style="flex:1 1 220px; background:linear-gradient(180deg,var(--beige),#fff); padding:1rem; border-radius:12px; box-shadow:var(--card-shadow)">
+          <strong>Custom Orders</strong>
+          <div class="muted" style="margin-top:0.6rem">Share color, motif, and vibe — we bring it to stitch.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery-wrap">
+      <h2 style="color:var(--maroon); margin-bottom:0.6rem">Gallery — Fusion Looks</h2>
+      <div class="gallery" aria-live="polite">
+        <figure class="card reveal">
+          <img src="https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/597c5a93-64a4-530d-84b4-e687246e3e1e/dbc7067e-b150-5d69-b7cb-000f8e448c3e.jpg" alt="Maroon Jacket Draped" loading="lazy">
+          <figcaption class="overlay"><span class="title">Maroon Jacket • Draped</span><span class="tag">#IndoStreet</span></figcaption>
+        </figure>
+
+        <figure class="card reveal">
+          <img src="https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/cc543882-1d31-5ddf-9b9f-121c795a512c/b34c6664-9456-527a-b690-bd2d77284e0b.jpg" alt="Mustard Kurta Minimal" loading="lazy">
+          <figcaption class="overlay"><span class="title">Mustard Kurta • Minimal</span><span class="tag">#EverydayEthnic</span></figcaption>
+        </figure>
+
+        <figure class="card reveal">
+          <img src="https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/515a0e2c-0fd7-5ef5-bffa-5feb90818e17/949b23ec-f599-5fdc-a86a-e7b7681036c8.jpg" alt="Street Sari Twisted" loading="lazy">
+          <figcaption class="overlay"><span class="title">Royal Streetwear Sets• Twisted</span><span class="tag">#Kurtaverse
+
+</span></figcaption>
+        </figure>
+
+        <figure class="card reveal">
+          <img src="https://d2u1z1lopyfwlx.cloudfront.net/thumbnails/c22f1d90-cbbf-5c62-8895-da9f99584c73/ead849a4-eb71-5297-99c0-9331553d52a3.jpg" alt="Embroidered Vest Crop" loading="lazy">
+          <figcaption class="overlay"><span class="title">Desi Dapper Drops</span><span class="tag">#HeritageCuts</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="order" style="margin-top:2rem;">
+      <h2 style="color:var(--maroon); margin-bottom:0.4rem">Customize Your Fit</h2>
+      <p class="muted">Tell us your idea — color, fabric, motif. Attach a reference image and we'll reply with a mockup.</p>
+
+      <div style="margin-top:0.8rem;">
+        <button class="btn primary" id="open-order-2">Open Order Form</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" id="modal" role="document" aria-hidden="true">
+      <div style="display:flex; gap:1rem; align-items:center; padding:1rem; border-bottom:1px solid rgba(0,0,0,0.04)">
+        <div style="width:56px;height:56px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#7a1226,#c43f2b)">✂️</div>
+        <div>
+          <h3 style="margin:0;color:var(--maroon)">Design Your Drip</h3>
+          <div class="muted" style="font-size:0.92rem">We'll get back with a mockup & estimate.</div>
+        </div>
+        <div style="margin-left:auto">
+          <button class="btn ghost" id="close-modal">Close ✕</button>
+        </div>
+      </div>
+
+      <form id="order-form" class="form" novalidate>
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required>
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+        </div>
+
+        <div>
+          <label for="idea">Design idea</label>
+          <textarea id="idea" name="idea" placeholder="Colors, fabrics, mood — be poetic." required></textarea>
+        </div>
+
+        <div>
+          <label for="ref">Upload reference (optional)</label>
+          <input id="ref" name="ref" type="file" accept="image/*">
+          <div class="file-preview" id="file-preview">No file chosen</div>
+        </div>
+
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+          <input id="consent" name="consent" type="checkbox" required>
+          <label for="consent" style="margin:0; font-weight:600">I agree to be contacted about my order.</label>
+        </div>
+
+        <div class="form-footer">
+          <div style="flex:1" class="muted">We reply within 2–3 business days.</div>
+          <div>
+            <button type="button" class="btn ghost" id="cancel">Cancel</button>
+            <button type="submit" class="btn primary">Send Order</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" style="position:fixed; right:20px; bottom:20px; background:var(--maroon); color:#fff; padding:0.9rem 1rem; border-radius:12px; display:none; z-index:120;">
+    Thanks for your interest! Our team will contact you soon.
+  </div>
+
+  <footer id="contact">
+    <div class="container footer-grid" style="align-items:flex-start;">
+      <div>
+        <div style="display:flex; gap:0.8rem; align-items:center;">
+          <div style="width:56px;height:56px;border-radius:12px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#7a1226,#c43f2b)">DD</div>
+          <div>
+            <div style="font-weight:800; color:var(--maroon)">Desi Drip</div>
+            <div class="muted">Fusing heritage & the street — made for you.</div>
+          </div>
+        </div>
+        <div style="margin-top:1rem" class="muted">Address: Studio 7, Kala Street, Somewhere, India</div>
+        <div class="muted" style="margin-top:0.3rem">Email: <a href="mailto:desidrip@example.com">desidrip@example.com</a> • Phone: +91 98765 43210</div>
+        <div style="margin-top:0.9rem; font-style:italic; color:var(--maroon)">Crafted in Culture, Styled for Tomorrow</div>
+      </div>
+
+      <div style="min-width:200px;">
+        <div style="font-weight:800; color:var(--maroon)">Follow</div>
+        <div class="muted" style="margin-top:0.6rem">Join us where the scroll meets the saree.</div>
+        <div style="display:flex; gap:10px; margin-top:10px; font-size:1.1rem">
+          <div title="Instagram">📸 @desidrip</div>
+          <div title="Pinterest">📌 DesiDrip</div>
+          <div title="Email">✉️ desidrip@example.com</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Modal + form handling, reveal on scroll, file preview, toast
+    (function(){
+      const openBtns = [document.getElementById('open-order'), document.getElementById('open-order-2')].filter(Boolean);
+      const backdrop = document.getElementById('modal-backdrop');
+      const modal = document.getElementById('modal');
+      const closeBtn = document.getElementById('close-modal');
+      const cancelBtn = document.getElementById('cancel');
+      const form = document.getElementById('order-form');
+      const fileInput = document.getElementById('ref');
+      const filePreview = document.getElementById('file-preview');
+      const toast = document.getElementById('toast');
+
+      function openModal(){
+        backdrop.style.display = 'flex';
+        backdrop.setAttribute('aria-hidden','false');
+        modal.setAttribute('aria-hidden','false');
+        setTimeout(()=> modal.classList.add('open'), 10);
+      }
+      function closeModal(){
+        modal.classList.remove('open');
+        backdrop.setAttribute('aria-hidden','true');
+        modal.setAttribute('aria-hidden','true');
+        setTimeout(()=> backdrop.style.display = 'none', 220);
+      }
+      openBtns.forEach(b=> b && b.addEventListener('click', openModal));
+      document.getElementById('order-link').addEventListener('click', e=>{ e.preventDefault(); openModal(); });
+
+      closeBtn.addEventListener('click', closeModal);
+      cancelBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', e=> { if(e.target === backdrop) closeModal(); });
+      document.addEventListener('keydown', e=> { if(e.key === 'Escape' && backdrop.style.display === 'flex') closeModal(); });
+
+      // file preview
+      if(fileInput){
+        fileInput.addEventListener('change', function(){
+          const f = this.files && this.files[0];
+          if(!f){ filePreview.textContent = 'No file chosen'; return; }
+          filePreview.textContent = f.name + ' — preview below';
+          if(f.type.startsWith('image/')){
+            const r = new FileReader();
+            r.onload = ev => {
+              let img = document.getElementById('tiny-preview');
+              if(!img){
+                img = document.createElement('img');
+                img.id = 'tiny-preview';
+                img.style.maxWidth = '120px';
+                img.style.maxHeight = '80px';
+                img.style.display = 'block';
+                img.style.marginTop = '8px';
+                img.style.borderRadius = '8px';
+                filePreview.appendChild(img);
+              }
+              img.src = ev.target.result;
+            };
+            r.readAsDataURL(f);
+          }
+        });
+      }
+
+      // form submit (simulated)
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const idea = form.idea.value.trim();
+        const consent = !!form.consent.checked;
+        if(!name || !email || !idea || !consent){
+          alert('Please complete required fields and agree to be contacted.');
+          return;
+        }
+        // close and show toast
+        closeModal();
+        toast.style.display = 'block';
+        toast.style.opacity = '0';
+        setTimeout(()=> toast.style.opacity = '1', 20);
+        setTimeout(()=> {
+          toast.style.opacity = '0';
+          setTimeout(()=> toast.style.display = 'none', 300);
+        }, 4200);
+        // reset
+        form.reset();
+        filePreview.textContent = 'No file chosen';
+        const im = document.getElementById('tiny-preview');
+        if(im) im.remove();
+      });
+
+      // Reveal on scroll
+      const reveals = document.querySelectorAll('.reveal');
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(ent=>{
+          if(ent.isIntersecting){ ent.target.classList.add('in'); obs.unobserve(ent.target); }
+        });
+      }, {threshold:0.08});
+      reveals.forEach(r=> obs.observe(r));
+
+      // Smooth anchor fallback for older browsers
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const t = document.querySelector(this.getAttribute('href'));
+          if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
