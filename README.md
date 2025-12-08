@@ -36,7 +36,7 @@ Organized color variables and reusable styling elements
 
 File Structure
 .
-│── desi_drip.html     # Main website file
+│──index.html     # Main website file
 └── README.md      # Documentation
 
 
