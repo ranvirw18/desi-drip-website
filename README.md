@@ -40,7 +40,6 @@ File Structure
 └── README.md      # Documentation
 
 
-(If your file is currently named desi_drip.html, rename it to index.html for GitHub Pages.)
 
 Technology Used
 
@@ -68,14 +67,14 @@ Save changes
 
 Your website will be available at:
 
-https://<your-username>.github.io/<repository-name>
+https://ranvirw18.github.io/desi-drip-website
 
 Usage
 
 Clone the repository and open the HTML file in any browser:
 
-git clone https://github.com/<your-username>/<repository-name>.git
-cd <repository-name>
+git clone https://github.com/ranvirw18/desi-drip-website.git
+cd desi-drip-website
 open index.html
 
 
